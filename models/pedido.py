@@ -68,5 +68,5 @@ class Pedido:
     
     def __retornar_total_formatado(self) -> Type[str]:
         dados = '\n\n' + ('-' * 43)
-        dados += f'\n{'TOTAL: ':-<34} R$ {self.retornar_total():.2f}'
+        dados += f'\n{'TOTAL PEDIDO: ':-<34} R$ {self.retornar_total():.2f}'
         return dados

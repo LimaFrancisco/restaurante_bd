@@ -35,8 +35,33 @@ class Conta:
             valor_conta += pedido.retornar_total()
 
         return valor_conta
+    
+    def exibir_nota(self) -> Type[str]:
+        nota = self.__retornar_dados_nota()
+        nota += self.__retornar_dados_pedidos()
+        nota += self.__retornar_total_formatado()
+        return nota
+    
+    # Metodos com funcionalidades para o metodo exibir_nota()
+    def __retornar_dados_nota(self) ->Type[str]:
+        cabecalho = '--------------- NOTA FISCAL ---------------'
+        cabecalho += f'\nID DA CONTA: # {self.retornar_id_conta()}\n\n'
+        return cabecalho 
+    
+    def __retornar_dados_pedidos(self) -> Type[str]:
+        dados_pedidos = ''
+        for pedido in self.__pedidos:
+            dados_pedidos += pedido.exibir_comanda()
+            dados_pedidos += '\n\n' + ('-' * 43) + '\n\n'
 
-    # Metodo que vericar o tipo do pagamento e retora uma variavel boleana
+        return dados_pedidos
+
+    def __retornar_total_formatado(self) -> Type[str]:
+        total_formatado = '\n' + (43 * '-') + '\n'
+        total_formatado += f'\n{'TOTAL CONTA: ':-<34} R$ {self.__valor:.2f}\n'
+        return total_formatado
+
+    # Metodo que verica o tipo do pagamento e retorna uma variavel boleana
     def __verificar_forma_pagamento(self, forma_pagamento: Type[str]) -> Type[bool]:
         forma_pagamento = forma_pagamento.upper()
         if forma_pagamento in ['DINHEIRO', 'DEBITO', 'CREDITO', 'PIX']:

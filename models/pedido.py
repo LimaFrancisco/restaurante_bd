@@ -30,8 +30,8 @@ class Pedido:
     def adicionar_produto(self, novo_produto: Type[Produto]) -> Type[None]:
         self.__produtos.append(novo_produto)
 
-    # Retorna uma nota com todos os dados do pedido
-    def exibir_nota_pedido(self) -> Type[str]:
+    # Retorna uma comanda com todos os itens do pedido
+    def exibir_comanda(self) -> Type[str]:
         dados = self.__retornar_apenas_dados_do_pedido()
         dados += self.__retornar_dados_produtos()
         dados += self.__retornar_total_formatado()

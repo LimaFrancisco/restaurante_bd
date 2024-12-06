@@ -1,7 +1,6 @@
 import psycopg2
-from psycopg2 import sql
 
-class Database: # Cria objeto que faz conexão com o bd
+class Database:
     def __init__(self, db_name, user, password, host='localhost', port=5432):
         self.connection = psycopg2.connect(
             dbname=db_name,
@@ -10,20 +9,20 @@ class Database: # Cria objeto que faz conexão com o bd
             host=host,
             port=port
         )
-        self.cursor = self.connection.cursor() # O objeto cursor é responsável pelas consultas ao banco
+        self.cursor = self.connection.cursor()
 
     def execute_query(self, query, params=None):
         try:
-            self.cursor.execute(query, params) # query = consulta| params = parametros
-            self.connection.commit() # Salva alteracao no banco
+            self.cursor.execute(query, params)
+            self.connection.commit()
         except Exception as e:
-            self.connection.rollback() # Desfaz uma alteração feita
+            self.connection.rollback()
             print(f"Error executing query: {e}")
-    
+
     def fetchall(self, query, params=None):
         self.cursor.execute(query, params)
-        return self.cursor.fetchall() # Retornar os registros obtidos pela consulta
-    
-    def close(self): # Encerra a conexao com bd
+        return self.cursor.fetchall()
+
+    def close(self):
         self.cursor.close()
         self.connection.close()
